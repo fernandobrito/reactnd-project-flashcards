@@ -1,9 +1,11 @@
 import React from 'react';
 import { View, Text, TextInput, StyleSheet, Alert } from 'react-native';
+import { connect } from "react-redux";
 
 import TextButton from '../ui/TextButton';
 import Header from "../ui/Header";
 import { purple, white } from "../utils/colors";
+import { addDeck } from "./reducer";
 
 class DeckAdd extends React.Component {
   state = { form: { title: 'Write your title here' } };
@@ -11,6 +13,7 @@ class DeckAdd extends React.Component {
   submit() {
     const { title } = this.state.form;
     Alert.alert('title', title);
+    this.props.addDeck({ title });
   }
 
   render() {
@@ -65,4 +68,8 @@ const styles = StyleSheet.create({
   }
 });
 
-export default DeckAdd;
+const mapDispatchToProps = {
+  addDeck: addDeck
+};
+
+export default connect(null, mapDispatchToProps)(DeckAdd);

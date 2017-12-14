@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Alert } from 'react-native'
-import { getDeckById } from './index';
+import { getDeckById } from './reducer';
 
 class DeckView extends React.Component {
   submit() {
