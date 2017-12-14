@@ -12,6 +12,7 @@ import DeckList from './deck/DeckList';
 import DeckAdd from './deck/DeckAdd';
 
 import { purple, white, black } from './utils/colors'
+import DeckView from "./deck/DeckView";
 
 const CustomStatusBar = ({ backgroundColor, ...props }) => {
   return (
@@ -19,7 +20,7 @@ const CustomStatusBar = ({ backgroundColor, ...props }) => {
       <StatusBar translucent backgroundColor={backgroundColor} {...props} />
     </View>
   )
-}
+};
 
 const Tabs = TabNavigator({
   ListDecks: {
@@ -41,10 +42,10 @@ const Tabs = TabNavigator({
     header: null
   },
   tabBarOptions: {
-    activeTintColor: Platform.OS === 'ios' ? purple : black,
+    activeTintColor: black,
     style: {
       height: 56,
-      backgroundColor: Platform.OS === 'ios' ? black : purple,
+      backgroundColor: purple,
       shadowColor: 'rgba(0, 0, 0, 0.24)',
       shadowOffset: {
         width: 0,
@@ -54,7 +55,22 @@ const Tabs = TabNavigator({
       shadowOpacity: 1
     }
   }
-})
+});
+
+const MainNavigator = StackNavigator({
+  Home: {
+    screen: Tabs,
+  },
+  DeckView: {
+    screen: DeckView,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple,
+      }
+    }
+  }
+});
 
 export default class App extends React.Component {
   render() {
@@ -62,7 +78,7 @@ export default class App extends React.Component {
       <Provider store={createStore(reducer)}>
         <View style={styles.container}>
           <CustomStatusBar backgroundColor={purple} barStyle="light-content" />
-          <Tabs />
+          <MainNavigator />
         </View>
       </Provider>
     );
