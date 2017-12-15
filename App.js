@@ -13,6 +13,7 @@ import DeckAdd from './deck/DeckAdd';
 
 import { purple, white, black } from './utils/colors'
 import DeckView from "./deck/DeckView";
+import CardAdd from './card/CardAdd';
 
 const CustomStatusBar = ({ backgroundColor, ...props }) => {
   return (
@@ -69,6 +70,9 @@ const MainNavigator = StackNavigator({
         backgroundColor: purple,
       }
     }
+  },
+  CardAdd: {
+    screen: CardAdd
   }
 });
 
