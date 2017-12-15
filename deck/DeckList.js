@@ -1,11 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableHighlight } from 'react-native';
 import { connect } from "react-redux";
+import { NavigationActions } from "react-navigation";
 
 import { getDecks } from "./reducer";
 import Header from "../ui/Header";
-import { gray } from "../utils/colors";
-import { NavigationActions } from "react-navigation";
+import { gray } from '../utils/colors';
+import globalStyles from '../ui/styles';
 
 const IndividualDeck = (props) => {
   const navigate = NavigationActions.navigate({ routeName: 'DeckView', params: { deck: props.deck }});
@@ -44,11 +45,8 @@ class DeckList extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: '#fff',
-  }, deckList: {
+  ...globalStyles,
+  deckList: {
     flexDirection: 'column',
     marginVertical: 20,
     alignItems: 'center',
@@ -67,7 +65,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     textAlign: 'right'
   }
-
 });
 
 function mapStateToProps(state) {

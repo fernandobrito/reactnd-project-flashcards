@@ -18,10 +18,8 @@ export function addDeck(deck) {
  * Selectors
  */
 
-export function getDeckById(state, id) {
-  return state.deck.list.filter((deck) => {
-    return item.id === id;
-  });
+export function getMostRecentDeck(state) {
+  return state.deck.byId[state.deck.mostRecent];
 }
 
 export function getDecks(state) {
@@ -35,14 +33,14 @@ export function getDecks(state) {
 const INITIAL_STATE = {
   byId: { 1: { id: 1, title: 'Flash cards', cards: [1, 2] },
           2: { id: 2, title: 'Other stuff', cards: [1, 2, 3] } },
-  selected: 1
+  mostRecent: 1
 };
 
 export default function reducer(state = INITIAL_STATE, action = {}) {
   switch (action.type) {
     case ADD:
       let deck = { [action.deck.id]: action.deck };
-      return merge({}, state, { byId: deck });
+      return merge({}, state, { byId: deck, mostRecent: deck.id });
     default: return state;
   }
 }
