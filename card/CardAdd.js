@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Alert, TextInput } from 'react-native';
+import { View, Text, StyleSheet, TextInput } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
 
@@ -13,9 +13,9 @@ class CardAdd extends React.Component {
     title: 'Add Card'
   };
 
-  state = { form: { question: 'Question', answer: 'Answer' } };
+  state = { form: { question: null, answer: null } };
 
-  submit() {
+  _submit() {
     const { deck } = this.props.navigation.state.params;
 
     const card = this.state.form;
@@ -24,6 +24,10 @@ class CardAdd extends React.Component {
     // const navigate = NavigationActions.navigate({ routeName: 'DeckView', params: { deckId: deck.id }});
     const navigate = NavigationActions.back();
     this.props.navigation.dispatch(navigate);
+  }
+
+  _updateFormField(field, value) {
+    this.setState((prevState) => ({ ...prevState, form: { ...prevState.form, [field]: value } }));
   }
 
   render() {
@@ -40,7 +44,8 @@ class CardAdd extends React.Component {
             style={styles.textInput}
             editable={true}
             maxLength={40}
-            onChangeText={(text) => this.setState({ form: { question: text }})}
+            onChangeText={(text) => this._updateFormField('question', text)}
+            placeholder="Write your question here..."
             value={this.state.form.question} />
 
           <Text style={styles.inputLabel}>Answer:</Text>
@@ -49,10 +54,11 @@ class CardAdd extends React.Component {
             style={styles.textInput}
             editable={true}
             maxLength={40}
-            onChangeText={(text) => this.setState({ form: { answer: text }})}
+            onChangeText={(text) => this._updateFormField('answer', text)}
+            placeholder="Write your answer here..."
             value={this.state.form.answer} />
 
-          <TextButton onPress={() => this.submit()}>
+          <TextButton onPress={() => this._submit()}>
             Submit
           </TextButton>
         </View>
@@ -71,9 +77,6 @@ const styles = StyleSheet.create({
     marginVertical: 20
   }, inputLabel: {
     fontSize: 25
-  }, textInput: {
-    fontSize: 20,
-    marginVertical: 20
   }
 });
 

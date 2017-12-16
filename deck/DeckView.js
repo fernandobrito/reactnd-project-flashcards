@@ -31,7 +31,7 @@ class DeckView extends React.Component {
             style={styles.secondaryButton} txtStyle={styles.secondaryButtonText}
             onPress={() => this.navigateTo('CardAdd', { deck })}
           >
-            Add cards
+            Add card
           </TextButton>
           <TextButton onPress={() => this.navigateTo('DeckPlay', { deck })}>
             Start quiz!

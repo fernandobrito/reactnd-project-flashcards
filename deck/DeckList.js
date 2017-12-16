@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableHighlight } from 'react-native';
+import { View, Text, StyleSheet, TouchableHighlight, ScrollView } from 'react-native';
 import { connect } from "react-redux";
 import { NavigationActions } from "react-navigation";
 
@@ -34,11 +34,11 @@ class DeckList extends React.Component {
       <View style={styles.container}>
         <Header>Deck List</Header>
 
-        <View style={styles.deckList}>
+        <ScrollView contentContainerStyle={styles.deckList}>
           {this.props.decks.map((deck) => {
             return <IndividualDeck deck={deck} key={deck.id} {...this.props} />
           })}
-        </View>
+        </ScrollView>
       </View>
     );
   }

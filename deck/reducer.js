@@ -6,7 +6,6 @@ import uuid from 'uuid/v4';
  */
 const ADD = 'deck/ADD';
 const ADD_CARD = 'deck/ADD_CARD';
-const REPLACE_STORE = 'deck/REPLACE_STORE';
 
 export function addDeck(deck) {
   deck.id = uuid();
@@ -18,11 +17,6 @@ export function addDeck(deck) {
 export function addCardToDeck(deckId, card) {
   return { type: ADD_CARD, deckId, card };
 }
-
-export function replaceDeckStore(store) {
-  return  { type: REPLACE_STORE, store };
-}
-
 
 /*
  * Selectors
@@ -45,7 +39,8 @@ export function getDecks(state) {
  * Reducer
  */
 const INITIAL_STATE = {
-  byId: { 1: { id: 1, title: 'Ruby Questions', cards: [{ question: 'A', answer: 'B' }] },
+  byId: { 1: { id: 1, title: 'Ruby Questions',
+            cards: [{ question: 'Ruby is a strongly typed language?', answer: 'No!' }] },
           2: { id: 2, title: 'JavaScript Questions',
             cards: [{ question: 'Inside which HTML element do we put the JavaScript?', answer: '<script>' },
                     { question: 'How do you round the number 7.25, to the nearest integer?', answer: 'Math.round(7.25)' }] } },
@@ -67,8 +62,6 @@ export default function reducer(state = INITIAL_STATE, action = {}) {
       deck.cards.push(action.card);
       deck = { [deck.id]: deck };
       return merge({}, state, { byId: deck, mostRecent: deck.id });
-    case REPLACE_STORE:
-      return action.store;
     default: return state;
   }
 }

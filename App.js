@@ -8,7 +8,7 @@ import reducer from './app/rootReducer';
 import { purple } from './utils/colors'
 import { fetchStateFromStorage, submitStateToStorage } from './utils/storage';
 import { MainNavigator } from './app/navigation';
-import CustomStatusBar from './app/CustomStatusBar';
+import CustomStatusBar from './ui/CustomStatusBar';
 
 /* Update local storage after each store update */
 const storageMiddleware = store => next => action => {

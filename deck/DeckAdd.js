@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput, StyleSheet, Alert } from 'react-native';
+import { View, Text, TextInput, StyleSheet } from 'react-native';
 import { connect } from "react-redux";
 import { NavigationActions } from "react-navigation";
 
@@ -9,9 +9,9 @@ import { addDeck, getMostRecentDeck } from "./reducer";
 import globalStyles from '../ui/styles';
 
 class DeckAdd extends React.Component {
-  state = { form: { title: 'Write your title here' } };
+  state = { form: { title: null } };
 
-  submit() {
+  _submit() {
     const { title } = this.state.form;
     this.props.addDeck({ title });
 
@@ -32,9 +32,10 @@ class DeckAdd extends React.Component {
             editable={true}
             maxLength={40}
             onChangeText={(text) => this.setState({ form: { title: text }})}
+            placeholder="Write your title here..."
             value={this.state.form.title} />
 
-          <TextButton onPress={() => this.submit()}>
+          <TextButton onPress={() => this._submit()}>
             Submit
           </TextButton>
         </View>
@@ -53,9 +54,6 @@ const styles = StyleSheet.create({
     marginVertical: 20
   }, inputLabel: {
     fontSize: 25
-  }, textInput: {
-    fontSize: 20,
-    marginVertical: 20
   }
 });
 

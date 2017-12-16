@@ -1,4 +1,4 @@
-import { purple, white } from '../utils/colors';
+import { lightgray, purple, white } from '../utils/colors';
 
 export default styles = {
   container: {
@@ -18,5 +18,13 @@ export default styles = {
     color: white,
     fontSize: 22,
     textAlign: 'center',
+  }, textInput: {
+    fontSize: 18,
+    borderWidth: 1,
+    borderColor: lightgray,
+    marginVertical: 20,
+    paddingBottom: 5,
+    paddingHorizontal: 5,
+    backgroundColor: "#eeeeee"
   }
 };
