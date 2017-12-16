@@ -25,6 +25,8 @@ function createNotification() {
 
   If user played a deck and opened and closed the app, existing notification won't be overwritten
   and next notification will start from tomorrow.
+
+  Check logs to a better understanding.
 */
 export function setDailyNotification({ startingFromDayOffeset = 0, overwriteExisting = false }) {
   Permissions.askAsync(Permissions.NOTIFICATIONS).then(({ status }) => {
