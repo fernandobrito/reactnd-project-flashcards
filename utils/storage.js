@@ -1,6 +1,6 @@
 import { AsyncStorage } from 'react-native';
 
-const STORAGE_KEY = 'mobile-flashcards:storage';
+const STORAGE_KEY = 'fernandobrito-mobile-flashcards:storage';
 
 export function fetchStateFromStorage() {
   return AsyncStorage.getItem(STORAGE_KEY);

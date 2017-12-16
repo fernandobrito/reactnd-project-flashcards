@@ -1,7 +1,7 @@
 import { Notifications, Permissions } from 'expo';
 import { AsyncStorage } from 'react-native';
 
-const NOTIFICATION_KEY = 'mobile-flashcards:notification';
+const NOTIFICATION_KEY = 'fernandobrito-mobile-flashcards:notification';
 
 function createNotification() {
   return {
