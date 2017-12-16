@@ -9,6 +9,10 @@ import globalStyles from '../ui/styles';
 import { addCardToDeck, getMostRecentDeck } from '../deck/reducer';
 
 class CardAdd extends React.Component {
+  static navigationOptions = {
+    title: 'Add Card'
+  };
+
   state = { form: { question: 'Question', answer: 'Answer' } };
 
   submit() {
@@ -27,8 +31,7 @@ class CardAdd extends React.Component {
 
     return (
       <View style={styles.container}>
-        <Header>Add Card</Header>
-        <Text style={styles.inputLabel}>Deck: {deck.title}</Text>
+        <Header>Deck: {deck.title}</Header>
 
         <View style={styles.content}>
           <Text style={styles.inputLabel}>Question:</Text>

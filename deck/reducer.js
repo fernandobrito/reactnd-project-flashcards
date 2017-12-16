@@ -40,8 +40,10 @@ export function getDecks(state) {
  * Reducer
  */
 const INITIAL_STATE = {
-  byId: { 1: { id: 1, title: 'Flash cards', cards: [1, 2] },
-          2: { id: 2, title: 'Other stuff', cards: [1, 2, 3] } },
+  byId: { 1: { id: 1, title: 'Ruby Questions', cards: [{ question: 'A', answer: 'B' }] },
+          2: { id: 2, title: 'JavaScript Questions',
+            cards: [{ question: 'Inside which HTML element do we put the JavaScript?', answer: '<script>' },
+                    { question: 'How do you round the number 7.25, to the nearest integer?', answer: 'Math.round(7.25)' }] } },
   mostRecent: 1
 };
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
-import { StyleSheet, Text, View, Platform, StatusBar } from 'react-native';
+import { StyleSheet, View, StatusBar } from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
 import { Constants } from 'expo'
@@ -14,6 +14,7 @@ import DeckAdd from './deck/DeckAdd';
 import { purple, white, black } from './utils/colors'
 import DeckView from "./deck/DeckView";
 import CardAdd from './card/CardAdd';
+import DeckPlay from './deck/DeckPlay';
 
 const CustomStatusBar = ({ backgroundColor, ...props }) => {
   return (
@@ -73,6 +74,9 @@ const MainNavigator = StackNavigator({
   },
   CardAdd: {
     screen: CardAdd
+  },
+  DeckPlay: {
+    screen: DeckPlay
   }
 });
 
