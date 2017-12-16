@@ -1,10 +1,10 @@
-import { lightgray, purple, white } from '../utils/colors';
+import { black, lightgray, purple, white } from '../utils/colors';
 
 const styles = {
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: '#fff',
+    backgroundColor: '#fff'
   },
   button: {
     backgroundColor: purple,
@@ -14,12 +14,12 @@ const styles = {
     height: 45,
     borderRadius: 2,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   buttonText: {
     color: white,
     fontSize: 22,
-    textAlign: 'center',
+    textAlign: 'center'
   },
   textInput: {
     fontSize: 18,
@@ -29,6 +29,15 @@ const styles = {
     paddingBottom: 5,
     paddingHorizontal: 5,
     backgroundColor: '#eeeeee'
+  },
+  secondaryButton: {
+    marginBottom: 10,
+    backgroundColor: white,
+    borderColor: black,
+    borderWidth: 1
+  },
+  secondaryButtonText: {
+    color: black
   }
 };
 

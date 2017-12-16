@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
 
 import globalStyles from '../ui/styles';
-import { gray, black, white } from '../utils/colors';
+import { gray } from '../utils/colors';
 import TextButton from '../ui/TextButton';
 import { getDeck, getMostRecentDeck } from './reducer';
 
@@ -13,7 +13,7 @@ class DeckView extends React.Component {
     title: 'View Deck'
   };
 
-  navigateTo(routeName, params = {}) {
+  _navigateTo(routeName, params = {}) {
     const navigate = NavigationActions.navigate({ routeName, params });
     this.props.navigation.dispatch(navigate);
   }
@@ -30,11 +30,11 @@ class DeckView extends React.Component {
           <TextButton
             style={styles.secondaryButton}
             txtStyle={styles.secondaryButtonText}
-            onPress={() => this.navigateTo('CardAdd', { deck })}
+            onPress={() => this._navigateTo('CardAdd', { deck })}
           >
             Add card
           </TextButton>
-          <TextButton onPress={() => this.navigateTo('DeckPlay', { deck })}>
+          <TextButton onPress={() => this._navigateTo('DeckPlay', { deck })}>
             Start quiz!
           </TextButton>
         </View>
@@ -58,15 +58,6 @@ const styles = StyleSheet.create({
   },
   bottom: {
     alignSelf: 'stretch',
-  },
-  secondaryButton: {
-    marginBottom: 10,
-    backgroundColor: white,
-    borderColor: black,
-    borderWidth: 1
-  },
-  secondaryButtonText: {
-    color: black
   }
 });
 

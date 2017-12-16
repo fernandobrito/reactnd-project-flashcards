@@ -62,6 +62,8 @@ $ cd reactnd-project-readable/server/
 $ yarn start
 ```
 
+Tested on a real Lenovo P2 Android device and on the Genymotion emulator.
+
 For more details on how to run the app on your mobile phone or on an emulator, please follow [expo](https://docs.expo.io/versions/latest/introduction/installation.html) documentation.
 
 

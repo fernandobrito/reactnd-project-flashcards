@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { NavigationActions } from 'react-navigation';
 
 import globalStyles from '../ui/styles';
 import { gray, red, green } from '../utils/colors';
@@ -12,28 +13,50 @@ class DeckPlay extends React.Component {
     title: 'Deck Quiz'
   };
 
-  static _finishedMessage() {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center' }}>
-        <Text style={[styles.deckTitle, { textAlign: 'center' }]}>
-          Good job! You have finished the deck!
-        </Text>
-      </View>
-    );
-  }
-
   state = { currentCard: 0, points: 0 };
+
+  _navigateBack() {
+    const navigate = NavigationActions.back();
+    this.props.navigation.dispatch(navigate);
+  }
 
   _hasFinishedGame() {
     const { deck } = this.props.navigation.state.params;
     return (this.state.currentCard + 1 === deck.cards.length + 1);
   }
+
+  _finishedMessage() {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center' }}>
+        <Text style={[styles.deckTitle, { textAlign: 'center' }]}>
+          Good job! You have finished the deck!
+        </Text>
+
+        <View style={[styles.bottom, { marginTop: 40 }]}>
+          <TextButton
+            style={styles.secondaryButton}
+            txtStyle={styles.secondaryButtonText}
+            onPress={() => this._navigateBack()}
+          >
+            Back to deck
+          </TextButton>
+          <TextButton onPress={() => this._restartQuiz()}>
+            Restart quiz!
+          </TextButton>
+        </View>
+      </View>
+    );
+  }
+
+  _restartQuiz() {
+    this.setState({ currentCard: 0, points: 0 });
+  }
+
   _nextCard(points) {
     this.setState(state => ({
       currentCard: (state.currentCard + 1),
       points: (state.points + points)
-    }
-    ));
+    }));
   }
 
   _content() {
@@ -42,7 +65,7 @@ class DeckPlay extends React.Component {
     if (this._hasFinishedGame()) {
       setDailyNotification({ startingFromDay: 1, overwriteExisting: true });
 
-      return this.constructor._finishedMessage();
+      return this._finishedMessage();
     }
 
     return (
@@ -90,7 +113,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   deckTitle: {
-    fontSize: 35,
+    fontSize: 35
   },
   deckDescription: {
     color: gray,
