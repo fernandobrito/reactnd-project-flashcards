@@ -58,7 +58,7 @@ $ yarn install
 ## Development
 
 ```bash
-$ cd reactnd-project-readable/server/
+$ cd reactnd-project-flashcards
 $ yarn start
 ```
 
