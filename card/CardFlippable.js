@@ -7,28 +7,26 @@ import { Dimensions } from 'react-native';
 
 class CardFlippable extends React.Component {
   render() {
-    const { width } = Dimensions.get('window');
+    const { height, width } = Dimensions.get('window');
 
     return (
-      <View style={{ flex: 1 }}>
-        <FlipCard
-          flipHorizontal={true}
-          flipVertical={false}
-          perspective={1000}
-          style={{ width: width * 0.88, borderWidth: 0 }}
-        >
-          {/* Face Side */}
-          <View style={[styles.cardContainer, { backgroundColor: gray }]}>
-            <Text style={styles.cardMainText}>{this.props.card.question}</Text>
-            <Text style={styles.cardSecondaryText}>QUESTION</Text>
-          </View>
-          {/* Back Side */}
-          <View style={[styles.cardContainer, { backgroundColor: lightgray }]}>
-            <Text style={styles.cardMainText}>{this.props.card.answer}</Text>
-            <Text style={styles.cardSecondaryText}>ANSWER</Text>
-          </View>
-        </FlipCard>
-      </View>
+      <FlipCard
+        flipHorizontal={true}
+        flipVertical={false}
+        perspective={1000}
+        style={{ width: width * 0.88, height: height * 0.2, borderWidth: 0 }}
+      >
+        {/* Face Side */}
+        <View style={[styles.cardContainer, { backgroundColor: gray }]}>
+          <Text style={styles.cardMainText}>{this.props.card.question}</Text>
+          <Text style={styles.cardSecondaryText}>QUESTION</Text>
+        </View>
+        {/* Back Side */}
+        <View style={[styles.cardContainer, { backgroundColor: lightgray }]}>
+          <Text style={styles.cardMainText}>{this.props.card.answer}</Text>
+          <Text style={styles.cardSecondaryText}>ANSWER</Text>
+        </View>
+      </FlipCard>
     );
   }
 }
