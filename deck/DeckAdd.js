@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
-import { connect } from "react-redux";
-import { NavigationActions } from "react-navigation";
+import { connect } from 'react-redux';
+import { NavigationActions } from 'react-navigation';
 
 import TextButton from '../ui/TextButton';
-import Header from "../ui/Header";
-import { addDeck, getMostRecentDeck } from "./reducer";
+import Header from '../ui/Header';
+import { addDeck, getMostRecentDeck } from './reducer';
 import globalStyles from '../ui/styles';
 
 class DeckAdd extends React.Component {
@@ -15,7 +15,7 @@ class DeckAdd extends React.Component {
     const { title } = this.state.form;
     this.props.addDeck({ title });
 
-    const navigate = NavigationActions.navigate({ routeName: 'DeckView', params: { deckId: null }});
+    const navigate = NavigationActions.navigate({ routeName: 'DeckView', params: { deckId: null } });
     this.props.navigation.dispatch(navigate);
   }
 
@@ -29,11 +29,12 @@ class DeckAdd extends React.Component {
 
           <TextInput
             style={styles.textInput}
-            editable={true}
+            editable
             maxLength={40}
-            onChangeText={(text) => this.setState({ form: { title: text }})}
+            onChangeText={text => this.setState({ form: { title: text } })}
             placeholder="Write your title here..."
-            value={this.state.form.title} />
+            value={this.state.form.title}
+          />
 
           <TextButton onPress={() => this._submit()}>
             Submit
@@ -50,19 +51,21 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     padding: 20
-  }, content: {
+  },
+  content: {
     marginVertical: 20
-  }, inputLabel: {
+  },
+  inputLabel: {
     fontSize: 25
   }
 });
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   mostRecentDeck: getMostRecentDeck(state)
 });
 
 const mapDispatchToProps = {
-  addDeck: addDeck
+  addDeck
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DeckAdd);

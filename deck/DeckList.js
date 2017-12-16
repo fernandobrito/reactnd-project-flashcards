@@ -1,15 +1,15 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableHighlight, ScrollView } from 'react-native';
-import { connect } from "react-redux";
-import { NavigationActions } from "react-navigation";
+import { connect } from 'react-redux';
+import { NavigationActions } from 'react-navigation';
 
-import { getDecks } from "./reducer";
-import Header from "../ui/Header";
+import { getDecks } from './reducer';
+import Header from '../ui/Header';
 import { gray } from '../utils/colors';
 import globalStyles from '../ui/styles';
 
 const IndividualDeck = (props) => {
-  const navigate = NavigationActions.navigate({ routeName: 'DeckView', params: { deckId: props.deck.id }});
+  const navigate = NavigationActions.navigate({ routeName: 'DeckView', params: { deckId: props.deck.id } });
 
   return (
     <TouchableHighlight
@@ -25,7 +25,7 @@ const IndividualDeck = (props) => {
         </Text>
       </View>
     </TouchableHighlight>
-  )
+  );
 };
 
 class DeckList extends React.Component {
@@ -35,9 +35,7 @@ class DeckList extends React.Component {
         <Header>Deck List</Header>
 
         <ScrollView contentContainerStyle={styles.deckList}>
-          {this.props.decks.map((deck) => {
-            return <IndividualDeck deck={deck} key={deck.id} {...this.props} />
-          })}
+          {this.props.decks.map(deck => <IndividualDeck deck={deck} key={deck.id} {...this.props} />)}
         </ScrollView>
       </View>
     );
@@ -52,15 +50,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderTopWidth: 1,
     borderTopColor: 'lightgray'
-  }, deckList_item: {
+  },
+  deckList_item: {
     alignSelf: 'stretch',
     padding: 10,
     borderBottomWidth: 1,
     borderBottomColor: 'lightgray'
-  }, deckList_item__title: {
+  },
+  deckList_item__title: {
     fontSize: 25,
     textAlign: 'left'
-  }, deckList_item__description: {
+  },
+  deckList_item__description: {
     color: gray,
     fontSize: 15,
     textAlign: 'right'
@@ -70,9 +71,7 @@ const styles = StyleSheet.create({
 function mapStateToProps(state) {
   return {
     decks: getDecks(state)
-  }
+  };
 }
 
-export default connect(
-  mapStateToProps
-)(DeckList)
+export default connect(mapStateToProps)(DeckList);

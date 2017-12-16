@@ -27,7 +27,7 @@ class CardAdd extends React.Component {
   }
 
   _updateFormField(field, value) {
-    this.setState((prevState) => ({ ...prevState, form: { ...prevState.form, [field]: value } }));
+    this.setState(prevState => ({ ...prevState, form: { ...prevState.form, [field]: value } }));
   }
 
   render() {
@@ -42,21 +42,23 @@ class CardAdd extends React.Component {
 
           <TextInput
             style={styles.textInput}
-            editable={true}
+            editable
             maxLength={40}
-            onChangeText={(text) => this._updateFormField('question', text)}
+            onChangeText={text => this._updateFormField('question', text)}
             placeholder="Write your question here..."
-            value={this.state.form.question} />
+            value={this.state.form.question}
+          />
 
           <Text style={styles.inputLabel}>Answer:</Text>
 
           <TextInput
             style={styles.textInput}
-            editable={true}
+            editable
             maxLength={40}
-            onChangeText={(text) => this._updateFormField('answer', text)}
+            onChangeText={text => this._updateFormField('answer', text)}
             placeholder="Write your answer here..."
-            value={this.state.form.answer} />
+            value={this.state.form.answer}
+          />
 
           <TextButton onPress={() => this._submit()}>
             Submit
@@ -73,19 +75,21 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     padding: 20
-  }, content: {
+  },
+  content: {
     marginVertical: 20
-  }, inputLabel: {
+  },
+  inputLabel: {
     fontSize: 25
   }
 });
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   mostRecentDeck: getMostRecentDeck(state)
 });
 
 const mapDispatchToProps = {
-  addCardToDeck: addCardToDeck
+  addCardToDeck
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CardAdd);

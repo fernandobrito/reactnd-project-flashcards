@@ -11,7 +11,7 @@ class CardFlippable extends React.Component {
 
     return (
       <FlipCard
-        flipHorizontal={true}
+        flipHorizontal
         flipVertical={false}
         perspective={1000}
         style={{ width: width * 0.88, height: height * 0.2, borderWidth: 0 }}

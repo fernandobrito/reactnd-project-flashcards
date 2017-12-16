@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native'
-import { connect } from "react-redux";
+import { View, Text, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
 
 import globalStyles from '../ui/styles';
@@ -13,8 +13,8 @@ class DeckView extends React.Component {
     title: 'View Deck'
   };
 
-  navigateTo(routeName, params={}) {
-    const navigate = NavigationActions.navigate({ routeName: routeName, params: params});
+  navigateTo(routeName, params = {}) {
+    const navigate = NavigationActions.navigate({ routeName, params });
     this.props.navigation.dispatch(navigate);
   }
 
@@ -28,7 +28,8 @@ class DeckView extends React.Component {
 
         <View style={styles.bottom}>
           <TextButton
-            style={styles.secondaryButton} txtStyle={styles.secondaryButtonText}
+            style={styles.secondaryButton}
+            txtStyle={styles.secondaryButtonText}
             onPress={() => this.navigateTo('CardAdd', { deck })}
           >
             Add card
@@ -49,18 +50,22 @@ const styles = StyleSheet.create({
   },
   deckTitle: {
     fontSize: 35,
-  }, deckDescription: {
+  },
+  deckDescription: {
     color: gray,
     fontSize: 25,
     padding: 20
-  }, bottom: {
+  },
+  bottom: {
     alignSelf: 'stretch',
-  }, secondaryButton: {
+  },
+  secondaryButton: {
     marginBottom: 10,
     backgroundColor: white,
     borderColor: black,
     borderWidth: 1
-  }, secondaryButtonText: {
+  },
+  secondaryButtonText: {
     color: black
   }
 });
@@ -76,11 +81,11 @@ function mapStateToProps(state, ownProps) {
   }
 
   return {
-    deck: deck
-  }
+    deck
+  };
 }
 
 export default connect(
   mapStateToProps,
   null,
-)(DeckView)
+)(DeckView);

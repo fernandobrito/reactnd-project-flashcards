@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native';
 
 import globalStyles from '../ui/styles';
 import { gray, black, white, red, green } from '../utils/colors';
@@ -20,9 +20,10 @@ class DeckPlay extends React.Component {
   }
 
   _nextCard(points) {
-    this.setState((state) => ({
+    this.setState(state => ({
       currentCard: (state.currentCard + 1),
-      points: (state.points + points) }
+      points: (state.points + points)
+    }
     ));
   }
 
@@ -60,7 +61,7 @@ class DeckPlay extends React.Component {
           </TextButton>
         </View>
       </View>
-    )
+    );
   }
 
   render() {
@@ -71,7 +72,7 @@ class DeckPlay extends React.Component {
         <Text style={styles.deckTitle}>{deck.title}</Text>
         <Text style={styles.deckDescription}>
           Card: #{Math.min(this.state.currentCard + 1, deck.cards.length)} of {deck.cards.length}
-          </Text>
+        </Text>
         <Text style={styles.deckDescription}>Score: {this.state.points}</Text>
 
         {this._content()}
@@ -87,16 +88,20 @@ const styles = StyleSheet.create({
   },
   deckTitle: {
     fontSize: 35,
-  }, deckDescription: {
+  },
+  deckDescription: {
     color: gray,
     fontSize: 25,
     padding: 0
-  }, bottom: {
+  },
+  bottom: {
     alignSelf: 'stretch'
-  }, incorrectButton: {
+  },
+  incorrectButton: {
     marginBottom: 10,
     backgroundColor: red
-  }, correctButton: {
+  },
+  correctButton: {
     backgroundColor: green
   }
 });
