@@ -9,7 +9,7 @@ import { purple } from './utils/colors';
 import { fetchStateFromStorage, submitStateToStorage } from './utils/storage';
 import { MainNavigator } from './app/navigation';
 import CustomStatusBar from './ui/CustomStatusBar';
-import { setDailyNotification } from './utils/notifications';
+import setDailyNotification from './utils/notifications';
 
 /* Update local storage after each store update */
 const storageMiddleware = store => next => (action) => {
@@ -67,10 +67,6 @@ class App extends React.Component {
     );
   }
 }
-
-App.propTypes = {
-  dispatch: PropTypes.func.isRequired
-};
 
 const styles = StyleSheet.create({
   container: {

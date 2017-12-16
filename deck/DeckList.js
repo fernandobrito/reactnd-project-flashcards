@@ -28,12 +28,12 @@ const IndividualDeck = (props) => {
   );
 };
 
-const DeckList = () => (
+const DeckList = props => (
   <View style={styles.container}>
     <Header>Deck List</Header>
 
     <ScrollView contentContainerStyle={styles.deckList}>
-      {this.props.decks.map(deck => <IndividualDeck deck={deck} key={deck.id} {...this.props} />)}
+      {props.decks.map(deck => <IndividualDeck deck={deck} key={deck.id} {...props} />)}
     </ScrollView>
   </View>
 );
