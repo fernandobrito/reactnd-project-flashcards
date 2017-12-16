@@ -6,6 +6,7 @@ import uuid from 'uuid/v4';
  */
 const ADD = 'deck/ADD';
 const ADD_CARD = 'deck/ADD_CARD';
+const REPLACE_STORE = 'deck/REPLACE_STORE';
 
 export function addDeck(deck) {
   deck.id = uuid();
@@ -16,6 +17,10 @@ export function addDeck(deck) {
 
 export function addCardToDeck(deckId, card) {
   return { type: ADD_CARD, deckId, card };
+}
+
+export function replaceDeckStore(store) {
+  return  { type: REPLACE_STORE, store };
 }
 
 
@@ -47,6 +52,8 @@ const INITIAL_STATE = {
   mostRecent: 1
 };
 
+
+
 export default function reducer(state = INITIAL_STATE, action = {}) {
   let deck;
 
@@ -60,6 +67,8 @@ export default function reducer(state = INITIAL_STATE, action = {}) {
       deck.cards.push(action.card);
       deck = { [deck.id]: deck };
       return merge({}, state, { byId: deck, mostRecent: deck.id });
+    case REPLACE_STORE:
+      return action.store;
     default: return state;
   }
 }

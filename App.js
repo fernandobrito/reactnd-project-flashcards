@@ -1,89 +1,61 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 
-import { StyleSheet, View, StatusBar } from 'react-native';
-import { TabNavigator, StackNavigator } from 'react-navigation';
-import { FontAwesome, Ionicons } from '@expo/vector-icons';
-import { Constants } from 'expo'
+import { StyleSheet, View, Text } from 'react-native';
 
 import reducer from './app/rootReducer';
-import DeckList from './deck/DeckList';
-import DeckAdd from './deck/DeckAdd';
+import { purple } from './utils/colors'
+import { fetchStateFromStorage, submitStateToStorage } from './utils/storage';
+import { MainNavigator } from './app/navigation';
+import CustomStatusBar from './app/CustomStatusBar';
 
-import { purple, white, black } from './utils/colors'
-import DeckView from "./deck/DeckView";
-import CardAdd from './card/CardAdd';
-import DeckPlay from './deck/DeckPlay';
-
-const CustomStatusBar = ({ backgroundColor, ...props }) => {
-  return (
-    <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
-      <StatusBar translucent backgroundColor={backgroundColor} {...props} />
-    </View>
-  )
+/* Update local storage after each store update */
+const storageMiddleware = store => next => action => {
+  next(action);
+  submitStateToStorage(store.getState());
 };
 
-const Tabs = TabNavigator({
-  ListDecks: {
-    screen: DeckList,
-    navigationOptions: {
-      tabBarLabel: 'Decks',
-      tabBarIcon: ({ tintColor }) => <Ionicons name='ios-bookmarks' size={30} color={tintColor} />
-    },
-  },
-  AddDeck: {
-    screen: DeckAdd,
-    navigationOptions: {
-      tabBarLabel: 'New Deck',
-      tabBarIcon: ({ tintColor }) => <FontAwesome name='plus-square' size={30} color={tintColor} />
-    },
-  }
-}, {
-  navigationOptions: {
-    header: null
-  },
-  tabBarOptions: {
-    activeTintColor: white,
-    style: {
-      height: 56,
-      backgroundColor: purple,
-      shadowColor: 'rgba(0, 0, 0, 0.24)',
-      shadowOffset: {
-        width: 0,
-        height: 3
-      },
-      shadowRadius: 6,
-      shadowOpacity: 1
-    }
-  }
-});
-
-const MainNavigator = StackNavigator({
-  Home: {
-    screen: Tabs,
-  },
-  DeckView: {
-    screen: DeckView,
-    navigationOptions: {
-      headerTintColor: white,
-      headerStyle: {
-        backgroundColor: purple,
-      }
-    }
-  },
-  CardAdd: {
-    screen: CardAdd
-  },
-  DeckPlay: {
-    screen: DeckPlay
-  }
-});
+const store = createStore(reducer, applyMiddleware(storageMiddleware));
 
 export default class App extends React.Component {
+  state = { store: store, isLoading: false };
+
+  // Adapted from: https://medium.com/@sumitkushwaha/syncing-redux-store-with-asyncstorage-in-react-native-2b8b890b9ca1
+  componentWillMount() {
+    this.setState({ isStoreLoading: true });
+
+    fetchStateFromStorage(this.props.dispatch).then((result) => {
+      console.log('[Storage] Loading', result);
+
+      if (result && result.length) {
+        this.setState({
+          store: createStore(reducer, JSON.parse(result), applyMiddleware(storageMiddleware))
+        });
+      } else {
+        this.setState({ store: store });
+      }
+
+      this.setState({ isStoreLoading: false });
+    }).catch((error) => {
+      console.error('[Storage] Unable to load state', error)
+
+      this.setState({ store: store });
+      this.setState({ isStoreLoading: false });
+    });
+  }
+
   render() {
+    if (this.state.isStoreLoading) {
+      return (
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+          <Text>Loading...</Text>
+        </View>
+      )
+    }
+
     return (
-      <Provider store={createStore(reducer)}>
+      <Provider store={this.state.store}>
         <View style={styles.container}>
           <CustomStatusBar backgroundColor={purple} barStyle="light-content" />
           <MainNavigator />
