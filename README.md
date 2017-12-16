@@ -35,7 +35,6 @@ The scope of the assignment was very limited, so it is not possible to edit entr
 * [react-navigation](https://github.com/react-community/react-navigation) (1.0.0-beta.21) Native Tab and Stack navigation
 * [redux](https://github.com/reactjs/redux) (3.7.2) Manage state
 * [react-redux](https://github.com/reactjs/react-redux/) (5.0.6) Redux bindings for React
-
 * [npm](https://www.npmjs.com) (3.10.10)
 * [create-react-app](https://github.com/facebookincubator/create-react-app) (1.0.10) Tool to bootstrap React applications
 * [lodash](https://github.com/lodash/lodash) (4.17.4) JavaScript utility library
