@@ -9,6 +9,7 @@ import { purple } from './utils/colors'
 import { fetchStateFromStorage, submitStateToStorage } from './utils/storage';
 import { MainNavigator } from './app/navigation';
 import CustomStatusBar from './ui/CustomStatusBar';
+import { setDailyNotification } from './utils/notifications';
 
 /* Update local storage after each store update */
 const storageMiddleware = store => next => action => {
@@ -24,6 +25,8 @@ export default class App extends React.Component {
   // Adapted from: https://medium.com/@sumitkushwaha/syncing-redux-store-with-asyncstorage-in-react-native-2b8b890b9ca1
   componentWillMount() {
     this.setState({ isStoreLoading: true });
+
+    setDailyNotification({ startingFromDay: 0, overwriteExisting: false });
 
     fetchStateFromStorage(this.props.dispatch).then((result) => {
       console.log('[Storage] Loading', result);

@@ -5,6 +5,7 @@ import globalStyles from '../ui/styles';
 import { gray, black, white, red, green } from '../utils/colors';
 import TextButton from '../ui/TextButton';
 import CardFlippable from '../card/CardFlippable';
+import { setDailyNotification } from '../utils/notifications';
 
 class DeckPlay extends React.Component {
   static navigationOptions = {
@@ -29,6 +30,8 @@ class DeckPlay extends React.Component {
     const { deck } = this.props.navigation.state.params;
 
     if (this._hasFinishedGame()) {
+      setDailyNotification({ startingFromDay: 1, overwriteExisting: true });
+
       return (
         <View style={{ flex: 1, justifyContent: 'center' }}>
           <Text style={[styles.deckTitle, { textAlign: 'center' }]}>
