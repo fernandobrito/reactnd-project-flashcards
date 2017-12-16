@@ -19,7 +19,7 @@ class DeckView extends React.Component {
   }
 
   render() {
-    const deck = this.props.deck;
+    const { deck } = this.props;
 
     return (
       <View style={[styles.container, styles.center]}>
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(state, ownProps) {
-  const deckId = ownProps.navigation.state.params.deckId;
+  const { deckId } = ownProps.navigation.state.params;
   let deck;
 
   if (deckId) {

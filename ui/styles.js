@@ -1,6 +1,6 @@
 import { lightgray, purple, white } from '../utils/colors';
 
-export default styles = {
+const styles = {
   container: {
     flex: 1,
     padding: 20,
@@ -31,3 +31,5 @@ export default styles = {
     backgroundColor: '#eeeeee'
   }
 };
+
+export default styles;

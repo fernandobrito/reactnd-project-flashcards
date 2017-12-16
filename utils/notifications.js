@@ -28,7 +28,7 @@ function createNotification() {
 
   Check logs to a better understanding.
 */
-export default function setDailyNotification({ startingFromDayOffeset = 0, overwriteExisting = false }) {
+function setDailyNotification({ startingFromDayOffeset = 0, overwriteExisting = false }) {
   Permissions.askAsync(Permissions.NOTIFICATIONS).then(({ status }) => {
     if (status !== 'granted') return;
 
@@ -56,3 +56,5 @@ export default function setDailyNotification({ startingFromDayOffeset = 0, overw
     });
   });
 }
+
+export default setDailyNotification;

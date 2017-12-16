@@ -28,19 +28,15 @@ const IndividualDeck = (props) => {
   );
 };
 
-class DeckList extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Header>Deck List</Header>
+const DeckList = () => (
+  <View style={styles.container}>
+    <Header>Deck List</Header>
 
-        <ScrollView contentContainerStyle={styles.deckList}>
-          {this.props.decks.map(deck => <IndividualDeck deck={deck} key={deck.id} {...this.props} />)}
-        </ScrollView>
-      </View>
-    );
-  }
-}
+    <ScrollView contentContainerStyle={styles.deckList}>
+      {this.props.decks.map(deck => <IndividualDeck deck={deck} key={deck.id} {...this.props} />)}
+    </ScrollView>
+  </View>
+);
 
 const styles = StyleSheet.create({
   ...globalStyles,

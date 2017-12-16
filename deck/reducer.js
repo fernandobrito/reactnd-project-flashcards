@@ -8,10 +8,11 @@ const ADD = 'deck/ADD';
 const ADD_CARD = 'deck/ADD_CARD';
 
 export function addDeck(deck) {
-  deck.id = uuid();
-  deck.cards = [];
+  const newDeck = Object.assign({}, deck);
+  newDeck.id = uuid();
+  newDeck.cards = [];
 
-  return { type: ADD, deck };
+  return { type: ADD, deck: newDeck };
 }
 
 export function addCardToDeck(deckId, card) {

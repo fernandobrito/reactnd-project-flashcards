@@ -2,10 +2,10 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 import globalStyles from '../ui/styles';
-import { gray, black, white, red, green } from '../utils/colors';
+import { gray, red, green } from '../utils/colors';
 import TextButton from '../ui/TextButton';
 import CardFlippable from '../card/CardFlippable';
-import { setDailyNotification } from '../utils/notifications';
+import setDailyNotification from '../utils/notifications';
 
 class DeckPlay extends React.Component {
   static navigationOptions = {
