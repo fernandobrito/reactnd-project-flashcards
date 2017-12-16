@@ -1,7 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
-import PropTypes from 'prop-types';
 import { StyleSheet, View, Text } from 'react-native';
 
 import reducer from './app/rootReducer';

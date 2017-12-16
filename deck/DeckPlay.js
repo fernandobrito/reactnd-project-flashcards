@@ -12,13 +12,22 @@ class DeckPlay extends React.Component {
     title: 'Deck Quiz'
   };
 
+  static _finishedMessage() {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center' }}>
+        <Text style={[styles.deckTitle, { textAlign: 'center' }]}>
+          Good job! You have finished the deck!
+        </Text>
+      </View>
+    );
+  }
+
   state = { currentCard: 0, points: 0 };
 
   _hasFinishedGame() {
     const { deck } = this.props.navigation.state.params;
     return (this.state.currentCard + 1 === deck.cards.length + 1);
   }
-
   _nextCard(points) {
     this.setState(state => ({
       currentCard: (state.currentCard + 1),
@@ -33,13 +42,7 @@ class DeckPlay extends React.Component {
     if (this._hasFinishedGame()) {
       setDailyNotification({ startingFromDay: 1, overwriteExisting: true });
 
-      return (
-        <View style={{ flex: 1, justifyContent: 'center' }}>
-          <Text style={[styles.deckTitle, { textAlign: 'center' }]}>
-            Goob job! You have finished the deck!
-          </Text>
-        </View>
-      );
+      return this.constructor._finishedMessage();
     }
 
     return (
