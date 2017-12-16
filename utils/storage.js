@@ -7,7 +7,7 @@ export function fetchStateFromStorage() {
 }
 
 export function submitStateToStorage(state) {
-  let stateJson = JSON.stringify(state);
+  const stateJson = JSON.stringify(state);
   AsyncStorage.setItem(STORAGE_KEY, stateJson);
 
   console.log('Updating storage: ', state);

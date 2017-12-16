@@ -16,7 +16,7 @@ function createNotification() {
       sticky: false,
       vibrate: true,
     }
-  }
+  };
 }
 
 /* Adapted from: https://github.com/udacity/reactnd-UdaciFitness-complete/blob/app-prep/utils/helpers.js
@@ -28,34 +28,31 @@ function createNotification() {
 
   Check logs to a better understanding.
 */
-export function setDailyNotification({ startingFromDayOffeset = 0, overwriteExisting = false }) {
+export default function setDailyNotification({ startingFromDayOffeset = 0, overwriteExisting = false }) {
   Permissions.askAsync(Permissions.NOTIFICATIONS).then(({ status }) => {
     if (status !== 'granted') return;
 
     AsyncStorage.getItem(NOTIFICATION_KEY).then((data) => {
       console.log('[Notification] Loading', data);
-      data = JSON.parse(data);
+      const dataJson = JSON.parse(data);
 
-      if (data && !overwriteExisting) {
-        console.log("[Notification] Existing data and no overwriting");
+      if (dataJson && !overwriteExisting) {
+        console.log('[Notification] Existing data and no overwriting');
         return;
       }
 
       Notifications.cancelAllScheduledNotificationsAsync();
 
-      let startDate = new Date();
+      const startDate = new Date();
       startDate.setDate(startDate.getDate() + startingFromDayOffeset);
       startDate.setHours(20);
       startDate.setMinutes(0);
 
-      Notifications.scheduleLocalNotificationAsync(
-        createNotification(), { time: startDate, repeat: 'day' }
-      );
+      Notifications
+        .scheduleLocalNotificationAsync(createNotification(), { time: startDate, repeat: 'day' });
 
-      console.log("[Notification] Creating daily notifications, starting from:", startDate);
-      AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true))
+      console.log('[Notification] Creating daily notifications, starting from:', startDate);
+      AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true));
     });
   });
-
-
 }
