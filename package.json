@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^6.2.1",
+    "eslint": "^4.13.1",
     "expo": "^23.0.4",
     "lodash": "^4.17.4",
     "prop-types": "^15.6.0",
